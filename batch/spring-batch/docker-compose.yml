@@ -1,0 +1,13 @@
+services:
+  mysql:
+    container_name: backoffice-auth-local-mysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=spring-batch
+      - MYSQL_ROOT_PASSWORD=local
+      - MYSQL_USER=local
+      - MYSQL_PASSWORD=local
+    ports:
+      - 3306:3306
+    volumes:
+      - "./init/:/docker-entrypoint-initdb.d/"
