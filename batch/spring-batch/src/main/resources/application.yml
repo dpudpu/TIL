@@ -5,14 +5,20 @@ spring:
     job:
       names: ${job.name:NONE} #Spring Batch가 실행될때, Program arguments로 job.name 값이 넘어오면 해당 값과 일치하는 Job만 실행
 #debug: true
+
 ---
 spring:
   config:
     activate:
       on-profile: local
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/spring-batch
+      url: jdbc:mysql://localhost:3306/spring-batch
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: local
       password: local
+
+logging:
+  level:
+    org:
+      springframework:
+        batch: DEBUG

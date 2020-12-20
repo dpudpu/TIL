@@ -8,9 +8,9 @@ import javax.persistence.Id
 data class Pay(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private val id: Long? = null,
-        private val amount: String,
-        private val txName: String,
-        private val txDateTime: LocalDateTime
+         var id: Long? = null,
+         var amount: String = "",
+         var txName: String = "",
+         var txDateTime: LocalDateTime = LocalDateTime.now()
 )
 

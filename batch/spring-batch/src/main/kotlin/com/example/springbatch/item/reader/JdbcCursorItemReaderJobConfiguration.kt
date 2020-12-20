@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import javax.sql.DataSource
 
+// https://jojoldu.tistory.com/336?category=902551
 @Configuration
 class JdbcCursorItemReaderJobConfiguration(
         private val jobBuilderFactory: JobBuilderFactory,
@@ -28,17 +29,17 @@ class JdbcCursorItemReaderJobConfiguration(
 
     @Bean
     fun jdbcCursorItemReaderStep() = stepBuilderFactory.get("jdbcCursorItemReaderStep")
-            .chunk<Pay, Pay>(chunkSize)
+            .chunk<Pay, Pay>(chunkSize) // Reader & Writer가 묶일 Chunk 트랜잭션 범위
             .reader(jdbcCursorItemReader())
             .writer(jdbcCursorItemWriter())
             .build()
 
     @Bean
     fun jdbcCursorItemReader(): ItemReader<Pay> = JdbcCursorItemReaderBuilder<Pay>()
-            .fetchSize(chunkSize)
+            .fetchSize(chunkSize) // Database에서 한번에 가져올 데이터 양
             .dataSource(dataSource)
-            .rowMapper(BeanPropertyRowMapper(Pay::class.java))
-            .sql("SELECT id, amout, tx_name, tx_date_time FROM pay")
+            .rowMapper(BeanPropertyRowMapper<Pay>(Pay::class.java))
+            .sql("SELECT id, amount, tx_name, tx_date_time FROM pay")
             .name("jdbcCursorItemReader")
             .build()
 
