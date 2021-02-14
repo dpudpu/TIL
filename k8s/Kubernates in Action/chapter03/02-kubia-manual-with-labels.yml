@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-manual-v2
+  labels: # add labels
+    creation_method: manual
+    env: prod
+spec:
+  containers:
+    - image: luksa/kubia
+      name: kubia
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+
+# kubectl get pods --show-labels
+# kubectl get pods -L creation_method,env
+# kubectl get po -l '!env',creation_method=manual
+# kubectl label po kubia-manual creation_method=manual
+# kubectl label po kubia-manual-v2 env=debug --overwrite

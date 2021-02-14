@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: custom-namespace
+
+# kubectl create -f 04-custom-namespace.yml
+# kubectl create -f 01-kubia-manual.yml -n custom-namespace
+# k get pods -n custom-namespace
