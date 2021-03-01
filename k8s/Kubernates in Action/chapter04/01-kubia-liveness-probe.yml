@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+spec:
+  containers:
+    - image: luksa/kubia-unhealthy
+      name: kubia
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 8080 # probe가 연결해야하는 네트워크 포트
+        initialDelaySeconds: 15 # 첫 번째 probe 실행까지 15초를 대기한다.
+
+# k logs kubia-liveness --previous
+# Liveness:       http-get http://:8080/ delay=0s timeout=1s period=10s #success=1 #failure=3
