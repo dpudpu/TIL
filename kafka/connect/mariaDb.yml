@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  mariaDb:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: "testdb"
+      MYSQL_ROOT_PASSWORD: "testdb"
+    ports:
+    - "3306:3306"
