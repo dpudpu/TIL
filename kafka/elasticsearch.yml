@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  elasticsearch-kakfa:
+    image: elasticsearch:7.10.1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms512m -Xmx1024m
+      network.publish_host: 127.0.0.1
+    container_name: elasticsearch
+  kibana:
+    image: kibana:7.10.1
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200

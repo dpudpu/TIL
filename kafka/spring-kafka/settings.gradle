@@ -1,0 +1,3 @@
+include 'kafka-multi-consumer-thread-hdfs-save'
+include 'elasticsearch-kafka-connector'
+
